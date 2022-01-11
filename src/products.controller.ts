@@ -7,33 +7,39 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { Product } from './product.model';
 
 @Controller('products')
 export class ProductsController {
+  products: Product[] = [
+    new Product('bk001', 'Clean Code', 29.99),
+    new Product('bk002', 'Reactoring', 39.99),
+    new Product('bk003', 'Practical AI', 19.99),
+  ];
+
   @Get()
-  getAll(): string {
-    return 'List all products';
+  getAll(): Product[] {
+    return this.products;
   }
 
   @Get(':id')
-  getOne(@Param() params): string {
-    return `Returns product ${params.id} information`;
+  getOne(@Param() params): Product {
+    return this.products[0];
   }
 
   @Post()
-  create(@Body() product): string {
-    console.log(product);
-    return 'Product created!';
+  create(@Body() product: Product) {
+    product.id = 100;
+    this.products.push(product);
   }
 
   @Put()
-  update(@Body() product): string {
-    console.log(product);
-    return `Produc information updated`;
+  update(@Body() product): Product {
+    return product;
   }
 
   @Delete(':id')
-  delete(@Param() params): string {
-    return `Product ${params.id} deleted!`;
+  delete(@Param() params) {
+    this.products.pop();
   }
 }
