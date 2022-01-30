@@ -4,9 +4,9 @@ import { Book } from './book.model';
 @Injectable()
 export class BooksService {
   private readonly books: Book[] = [
-    new Book('bk001', 'Clean Code', 29.99),
-    new Book('bk002', 'Reactoring', 39.99),
-    new Book('bk003', 'Practical AI', 19.99),
+    // new Book('bk001', 'Clean Code', 29.99),
+    // new Book('bk002', 'Reactoring', 39.99),
+    // new Book('bk003', 'Practical AI', 19.99),
   ];
 
   getAll(): Book[] {
