@@ -5,16 +5,18 @@ import { BooksService } from './books.service';
 import { BooksController } from './books.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Book } from './book.model';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     SequelizeModule.forRoot({
       dialect: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '123456',
-      database: 'bookstore',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       autoLoadModels: true,
       synchronize: true,
     }),
